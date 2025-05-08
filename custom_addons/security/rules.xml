@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Financiación: Usuarios no pueden modificar ni eliminar si el estado es "signed" -->
+    <record id="loan_user_signed_rule" model="ir.rule">
+        <field name="name">No modificar préstamos firmados (usuarios)</field>
+        <field name="model_id" ref="model_loan_application"/>
+        <field name="groups" eval="[(4, ref('custom_addons.group_financing_user'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="domain_force">[('state', 'in', ['signed'])]</field>
+    </record>
+</odoo>
