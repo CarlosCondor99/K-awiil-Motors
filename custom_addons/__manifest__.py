@@ -8,6 +8,10 @@
     'demo': [
         'data/loan_demo.xml',
     ],
+    'data': [
+        'views/loan_application_views.xml',
+        'views/motorcycle_financing_menu.xml',
+    ],
     'license': 'OPL-1',
     'application': True,
     'depends': [],

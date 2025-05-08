@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Menú principal que aparece en el dashboard -->
+    <menuitem id="menu_moto_finance_root"
+              name="Moto Finance"
+              sequence="10"
+              web_icon="custom_addons,static/description/icon.png" />
+
+    <!-- Menú en la barra superior -->
+    <menuitem id="menu_motorcycle_financing"
+              name="Motorcycle Financing"
+              parent="menu_moto_finance_root"
+              sequence="20" />
+
+    <!-- Submenú que abre la vista de loan.application -->
+    <menuitem id="menu_loan_applications"
+              name="Loan Applications"
+              parent="menu_motorcycle_financing"
+              action="action_loan_application"
+              sequence="30" />
+</odoo>
