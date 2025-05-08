@@ -11,6 +11,5 @@
     'license': 'OPL-1',
     'application': True,
     'depends': [],
-    'data': [],
     'installable': True,
 }
