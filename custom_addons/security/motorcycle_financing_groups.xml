@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Categorías -->
+    <record id="motorcycle_dealership_category" model="ir.module.category">
+        <field name="name">Motorcycle Dealership</field>
+    </record>
+
+    <record id="motorcycle_financing_category" model="ir.module.category">
+        <field name="name">Motorcycle Financing</field>
+        <field name="parent_id" ref="custom_addons.motorcycle_dealership_category"/>
+    </record>
+
+    <!-- Grupos -->
+    <record id="group_financing_user" model="res.groups">
+        <field name="name">Motorcycle Financing User</field>
+        <field name="category_id" ref="custom_addons.motorcycle_financing_category"/>
+        <field name="implied_ids" eval="[Command.link(ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_financing_admin" model="res.groups">
+        <field name="name">Motorcycle Financing Admin</field>
+        <field name="category_id" ref="custom_addons.motorcycle_financing_category"/>
+        <field name="implied_ids" eval="[Command.link(ref('custom_addons.group_financing_user'))]"/>
+    </record>
+</odoo>
