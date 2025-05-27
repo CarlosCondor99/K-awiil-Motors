@@ -1,11 +1,113 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+    <!-- Acción -->
     <record id="action_loan_application" model="ir.actions.act_window">
         <field name="name">Loan Applications</field>
         <field name="res_model">loan.application</field>
         <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p>No loan applications found. Click "Create" to add a new one.</p>
+        </field>
+    </record>
+
+    <!-- Vista de lista -->
+    <record id="view_loan_application_list" model="ir.ui.view">
+        <field name="name">loan.application.list</field>
+        <field name="model">loan.application</field>
+        <field name="arch" type="xml">
+            <list editable='bottom'>
+                <field name="name"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                <field name="state"/>
+                <field name="loan_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="date_application"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vista de formulario -->
+    <record id="view_loan_application_form" model="ir.ui.view">
+        <field name="name">loan.application.form</field>
+        <field name="model">loan.application</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <header>
+                        <button name="action_send_for_approval" type="object" string="Enviar para Aprobación"
+                                attrs="{'invisible': [('state', 'in', ['sent', 'approved', 'rejected', 'signed'])]}" class="btn-primary"/>
+
+                        <button name="%(loan_application_reject_wizard_action)d" type="action" string="Rechazar Préstamo"
+                                attrs="{'invisible': [('state', 'in', ['approved', 'rejected', 'signed'])]}" class="btn-danger"/>
+
+                        <button name="action_approve_loan" type="object" string="Aprobar Préstamo"
+                                attrs="{'invisible': [('state', '!=', 'sent')]}" class="btn-success"/>
+                        <field name="state" widget="statusbar"
+                            statusbar_visible="draft,sent,review,approved,rejected,signed"/>
+                    </header>
+
+                    <group>
+                        <field name="name" options="{'line_breaks': False}"/>
+                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    </group>
+
+                    <group>
+                        <field name="sale_order_total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        <field name="down_payment" readonly="state in ('sent', 'approved', 'signed')" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        <field name="loan_amount" readonly="state in ('sent', 'approved', 'signed')" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        <field name="interest_rate" readonly="state in ('sent', 'approved', 'signed')" widget="percentage"/>
+                        <field name="loan_term" readonly="state in ('sent', 'approved', 'signed')"/>
+                    </group>
+
+                    <group>
+                        <field name="date_application"/>
+                        <field name="date_approval"/>
+                        <field name="date_signed"/>
+                        <field name="date_rejection"/>
+                        <field name="rejection_reason"/>
+                    </group>
+
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="sale_order_id"/>
+                        <field name="user_id"/>
+                        <field name="product_template_id"/>
+                    </group>
+
+                    <group>
+                        <field name="notes"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Documents">
+                            <field name="document_ids" readonly="state in ('sent', 'approved', 'signed')">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="type_id"/>
+                                    <field name="state" widget="badge"/>
+                                    <field name="attachment" widget="binary"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista de búsqueda -->
+    <record id="view_loan_application_search" model="ir.ui.view">
+        <field name="name">loan.application.search</field>
+        <field name="model">loan.application</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="state"/>
+                <field name="currency_id"/>
+            </search>
         </field>
     </record>
 </odoo>
