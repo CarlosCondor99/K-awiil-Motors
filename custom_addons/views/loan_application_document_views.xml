@@ -1,0 +1,21 @@
+
+<odoo>
+    <record id="view_loan_application_document_list" model="ir.ui.view">
+        <field name="name">loan.application.document.list</field>
+        <field name="model">loan.application.document</field>
+        <field name="arch" type="xml">
+            <list editable="bottom" decoration-success="state == 'approved'"
+                      decoration-muted="state == 'new'"
+                      decoration-danger="state == 'rejected'">
+                <field name="name"/>
+                <field name="type_id"/>
+                <field name="state" widget="badge"/>
+                <field name="attachment" widget="binary"/>
+                <button name="action_approve_document" type="object" icon="fa-check"
+                        attrs="{'invisible': [('state', '=', 'approved')]}" class="btn-primary"/>
+                <button name="action_reject_document" type="object" icon="fa-times"
+                        attrs="{'invisible': [('state', '=', 'rejected')]}" class="btn-danger"/>
+            </list>
+        </field>
+    </record>
+</odoo>

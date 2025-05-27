@@ -1,3 +1,13 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_loan_application_admin,Loan Application Admin,model_loan_application,custom_addons.group_financing_admin,1,1,1,1
 access_loan_application_user,Loan Application User,model_loan_application,custom_addons.group_financing_user,1,1,1,0
+
+access_loan_application_tag_user,Loan Application Tag User,model_loan_application_tag,custom_addons.group_financing_user,1,0,0,0
+access_loan_application_tag_admin,Loan Application Tag Admin,model_loan_application_tag,custom_addons.group_financing_admin,1,1,1,1
+
+access_loan_application_document_user,Loan Application Document User,model_loan_application_document,custom_addons.group_financing_user,1,1,1,1
+
+access_loan_application_document_type_user,Loan Application Doc Type User,model_loan_application_document_type,custom_addons.group_financing_user,1,0,0,0
+access_loan_application_document_type_admin,Loan Application Doc Type Admin,model_loan_application_document_type,custom_addons.group_financing_admin,1,1,1,1
+
+access_loan_application_reject_wizard,Loan Application Reject Wizard,model_loan_application_reject_wizard,custom_addons.group_financing_user,1,1,1,0

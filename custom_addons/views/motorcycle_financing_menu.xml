@@ -18,4 +18,9 @@
               parent="menu_motorcycle_financing"
               action="action_loan_application"
               sequence="30" />
+              
+    <menuitem id="menu_loan_config"
+          name="Configuración"
+          parent="menu_loan_application_root"
+          groups="custom_addons.group_financing_admin"/>
 </odoo>
